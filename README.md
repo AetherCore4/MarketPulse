@@ -1,101 +1,199 @@
-# Stock Impact AI Analyst
+# 📊 MarketPulse — AI Stock Impact Analyzer
 
-This project provides a simple web application that uses Google's Gemini AI to analyze news articles and extract their potential impact on publicly traded stocks. Users can paste news content, and the AI generates a structured, easy-to-understand report covering key financial and market-related insights.
+MarketPulse is an AI-powered web application that converts financial news into structured, actionable stock insights using Google’s Gemini API.
 
-## Features
-
-*   **AI-Powered News Analysis:** Leverages Google's Gemini-2.5-flash model for intelligent text analysis.
-*   **Stock-Focused Insights:** Specifically designed to identify and explain impacts relevant to stock performance, company valuation, and investor sentiment.
-*   **Structured JSON Output:** The AI's response is formatted into a clean JSON object, making it easy for the frontend to parse and display.
-*   **Key Data Points:** Extracts information on:
-    *   Company mentioned & Ticker Symbol
-    *   Market Summary
-    *   Investor Sentiment & Stock Impact Magnitude
-    *   Affected Financial/Operational Metrics (e.g., Revenue, Profit Margins)
-    *   Short-term Stock Reaction
-    *   Long-term Stock Outlook
-    *   Risk Factors Highlighted
-    *   Peer Impact
-    *   Relevant Jargon Explanations
-*   **User-Friendly Interface:** A clean, responsive HTML frontend to input news and display the analysis.
-*   **Error Handling:** Robust error handling for missing API keys, invalid news input, and issues with the AI API.
-
-## How it Works
-
-The application consists of two main parts:
-
-1.  **`app.py` (Flask Backend):**
-    *   A Flask web server that exposes a `/analyze` endpoint.
-    *   Receives news text via a POST request from the frontend.
-    *   Constructs a highly specific prompt for the Gemini AI, requesting a JSON output focused on stock impact.
-    *   Sends the prompt to the Gemini API using the `requests` library.
-    *   Parses the AI's response, stripping any markdown formatting (like ` ```json `) to ensure valid JSON.
-    *   Returns the structured JSON analysis to the frontend.
-    *   Requires a `GEMINI_API_KEY` loaded from a `.env` file.
-
-2.  **`index.html` (Frontend):**
-    *   An HTML page with a textarea for news input and a button to trigger analysis.
-    *   Uses JavaScript to send the news text to the Flask backend.
-    *   Displays a loading indicator while the AI processes the request.
-    *   Parses the JSON response from the backend.
-    *   Dynamically renders the analysis results into a clean, categorized dashboard format.
-
-## Setup and Installation
-
-### Prerequisites
-
-*   Python 3.7+
-*   A Google Cloud Project with the Gemini API enabled.
-*   A Gemini API Key.
-
-### Steps
-
-1.  **Clone the Repository (or create files manually):**
-    ```bash
-    # If you have a git repo
-    git clone <your-repo-url>
-    cd stock-impact-ai-analyst
-    ```
-    If creating manually, ensure `app.py` is in the root and `index.html` is inside a `templates` directory:
-    ```
-    .
-    ├── app.py
-    └── templates/
-        └── index.html
-    ```
-
-2.  **Install Python Dependencies:**
-    ```bash
-    pip install Flask Flask-Cors python-dotenv requests
-    ```
-
-3.  **Create a `.env` file:**
-    In the same directory as `app.py`, create a file named `.env` and add your Gemini API Key:
-    ```
-    GEMINI_API_KEY=YOUR_GEMINI_API_KEY_HERE
-    ```
-    Replace `YOUR_GEMINI_API_KEY_HERE` with your actual key obtained from Google AI Studio or Google Cloud.
-
-4.  **Run the Flask Backend:**
-    ```bash
-    python app.py
-    ```
-    You should see output similar to: `Server starting at http://localhost:8080`
-
-5.  **Access the Frontend:**
-    Open your web browser and navigate to `http://localhost:8080`.
-
-## Usage
-
-1.  **Paste News:** In the web interface, paste a news article or snippet into the provided text area.
-2.  **Analyze:** Click the "Analyze Financial Data" button.
-3.  **View Report:** The AI will process the news, and a structured report detailing its stock market impact will appear on the page.
-
-## Technologies Used
-
-*   **Backend:** Python, Flask
-*   **Frontend:** HTML, CSS, JavaScript
-*   **AI:** Google Gemini-2.5-flash API
-*   **Dependency Management:** `python-dotenv` (for environment variables), `requests` (for HTTP requests)
+It acts like a digital analyst — reading news, decoding sentiment, and translating it into market impact signals in seconds.
 
 ---
+
+## 🚀 Features
+
+* 🤖 **AI-Driven Analysis**
+  Uses Gemini AI to interpret financial news with contextual understanding
+
+* 📈 **Stock Impact Evaluation**
+  Identifies how news affects stock price, sentiment, and company outlook
+
+* 🧾 **Structured Output (JSON)**
+  Clean, machine-readable format for seamless frontend rendering
+
+* 🔍 **Detailed Insights Extraction**
+
+  * Company Name & Ticker
+  * Market Summary
+  * Investor Sentiment
+  * Impact Magnitude (Low / Medium / High)
+  * Financial Metrics Affected
+  * Short-term Reaction
+  * Long-term Outlook
+  * Risk Factors
+  * Industry / Peer Impact
+  * Financial Terminology Explained
+
+* ⚡ **Fast & Responsive UI**
+  Smooth frontend with real-time feedback
+
+* 🛡️ **Error Handling**
+  Handles API failures, invalid input, and missing keys gracefully
+
+---
+
+## 🧠 How It Works
+
+### 🔹 Backend (Flask API)
+
+* Accepts news input via `/analyze` endpoint
+* Sends structured prompt to Gemini API
+* Processes and cleans response
+* Returns formatted JSON
+
+### 🔹 Frontend (HTML + JS)
+
+* User inputs news
+* Sends request to backend
+* Displays structured analysis
+* Shows loading state during processing
+
+---
+
+## 📁 Project Structure
+
+```
+.
+├── app.py
+├── requirements.txt
+├── .env              # (ignored)
+├── .env.example      # template
+└── templates/
+    └── index.html
+```
+
+---
+
+## ⚙️ Setup & Installation
+
+### 🔧 Prerequisites
+
+* Python 3.7+
+* Gemini API Key
+
+---
+
+### 🚀 Steps
+
+#### 1. Clone Repository
+
+```bash
+git clone https://github.com/AetherCore4/MarketPulse.git
+cd MarketPulse
+```
+
+#### 2. Install Dependencies
+
+```bash
+pip install Flask Flask-Cors python-dotenv requests
+```
+
+#### 3. Setup Environment Variables
+
+Create a `.env` file:
+
+```env
+GEMINI_API_KEY=your_actual_api_key
+```
+
+⚠️ Never upload `.env` to GitHub
+
+---
+
+#### 4. Create `.env.example` (Recommended)
+
+```env
+GEMINI_API_KEY=your_api_key_here
+```
+
+---
+
+#### 5. Run the Application
+
+```bash
+python app.py
+```
+
+Open in browser:
+
+```
+http://localhost:8080
+```
+
+---
+
+## 🧪 Usage
+
+1. Paste financial/news content
+2. Click **Analyze**
+3. View structured stock insights instantly
+
+---
+
+## 🔐 Environment Variables
+
+| Variable       | Description         |
+| -------------- | ------------------- |
+| GEMINI_API_KEY | Your Gemini API Key |
+
+---
+
+## 🛠 Tech Stack
+
+* **Backend:** Python, Flask
+* **Frontend:** HTML, CSS, JavaScript
+* **AI:** Google Gemini API
+* **Libraries:** requests, python-dotenv
+
+---
+
+## 📌 Future Enhancements
+
+* 📊 Real-time stock price integration
+* 🧠 Multi-news aggregation
+* 📉 Sentiment trend graphs
+* ☁️ Deployment (Render / Vercel / AWS)
+* 🔔 Alert system for stock-impacting news
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome!
+
+1. Fork the repository
+2. Create a new branch
+3. Make your changes
+4. Submit a Pull Request
+
+---
+
+## 📜 License
+
+MIT License
+
+Copyright (c) 2026 Jishan Shaikh
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files...
+
+---
+
+## 🌟 Support
+
+If you like this project, consider giving it a ⭐ on GitHub
+It helps others discover it and keeps the momentum alive 🚀
+
+---
+
+## 💡 Inspiration
+
+MarketPulse is inspired by how modern traders rely on fast, AI-powered insights instead of manually analyzing news.
+
+Think of it as your **personal AI financial analyst** — always reading, always interpreting.
